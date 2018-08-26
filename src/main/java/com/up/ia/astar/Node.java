@@ -1,11 +1,5 @@
 package com.up.ia.astar;
 
-/**
- * Node Class
- *
- * @author Marcelo Surriabre
- * @version 2.0, 2018-02-23
- */
 public class Node {
 
     private float g;
@@ -15,6 +9,7 @@ public class Node {
     private int col;
     private boolean isBlock;
     private Node parent;
+    private float cost;
 
     public Node(int row, int col) {
         super();
@@ -55,7 +50,7 @@ public class Node {
 
     @Override
     public String toString() {
-        return "Node [row=" + row + ", col=" + col + "]";
+        return "Node [row=" + row + ", col=" + col + " cost= " + cost + "]";
     }
 
     public int getH() {
@@ -112,5 +107,13 @@ public class Node {
 
     public void setCol(int col) {
         this.col = col;
+    }
+
+    public float getCost() {
+        return cost;
+    }
+
+    public void setCost(float cost) {
+        this.cost = cost;
     }
 }

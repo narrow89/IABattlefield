@@ -1,28 +1,32 @@
 package com.up.ia.astar;
 
+import ia.battle.core.BattleField;
+import ia.battle.core.FieldCell;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 
-/**
- * A Star Algorithm
- *
- * @author Marcelo Surriabre
- * @version 2.0, 2017-02-23
- */
 public class AStar {
-    private static int DEFAULT_HV_COST = 1; // Horizontal - Vertical Cost
-    private static float DEFAULT_DIAGONAL_COST = DEFAULT_HV_COST * 1.41f;
-    private int hvCost;
+    private static float DEFAULT_HV_COST = 10; // Horizontal - Vertical Cost
+    private static float DEFAULT_DIAGONAL_COST = 14;
+    private float hvCost;
     private float diagonalCost;
     private Node[][] searchArea;
     private PriorityQueue<Node> openList;
     private List<Node> closedList;
     private Node initialNode;
     private Node finalNode;
+    private List<FieldCell> cells;
 
-    public AStar(int rows, int cols, Node initialNode, Node finalNode, int hvCost, float diagonalCost) {
+
+    public AStar(int rows, int cols, Node initialNode, Node finalNode, float hvCost, float diagonalCost, List<FieldCell> cells) {
+        this(rows, cols, initialNode, finalNode, DEFAULT_HV_COST, DEFAULT_DIAGONAL_COST);
+        this.cells = cells;
+    }
+
+    public AStar(int rows, int cols, Node initialNode, Node finalNode, float hvCost, float diagonalCost) {
         this.hvCost = hvCost;
         this.diagonalCost = diagonalCost;
         setInitialNode(initialNode);
@@ -47,6 +51,7 @@ public class AStar {
             for (int j = 0; j < searchArea[0].length; j++) {
                 Node node = new Node(i, j);
                 node.calculateHeuristic(getFinalNode());
+                node.setCost(BattleField.getInstance().getFieldCell(j, i).getCost());
                 this.searchArea[i][j] = node;
             }
         }
@@ -141,6 +146,9 @@ public class AStar {
 
     private void checkNode(Node currentNode, int col, int row, float cost) {
         Node adjacentNode = getSearchArea()[row][col];
+
+        cost = BattleField.getInstance().getFieldCell(col, row).getCost();
+
         if (!adjacentNode.isBlock() && !getClosedList().contains(adjacentNode)) {
             if (!getOpenList().contains(adjacentNode)) {
                 adjacentNode.setNodeData(currentNode, cost);
@@ -209,11 +217,11 @@ public class AStar {
         this.closedList = closedList;
     }
 
-    public int getHvCost() {
+    public float getHvCost() {
         return hvCost;
     }
 
-    public void setHvCost(int hvCost) {
+    public void setHvCost(float hvCost) {
         this.hvCost = hvCost;
     }
 
@@ -221,7 +229,7 @@ public class AStar {
         return diagonalCost;
     }
 
-    private void setDiagonalCost(int diagonalCost) {
+    private void setDiagonalCost(float diagonalCost) {
         this.diagonalCost = diagonalCost;
     }
 }
