@@ -1,5 +1,6 @@
 package com.up.ia;
 
+
 import com.up.ia.astar.AStar;
 import com.up.ia.astar.Node;
 import ia.battle.core.BattleField;
@@ -14,7 +15,6 @@ public class App {
     public static void main(String[] args) {
 
         BattleField.getInstance().initCells();
-
         int rows = ConfigurationManager.getInstance().getMapHeight();
         int cols = ConfigurationManager.getInstance().getMapWidth();
 
@@ -31,8 +31,8 @@ public class App {
             }
         }
 
-        System.out.println(BattleField.getInstance().getFieldCell(0, 0).getFieldCellType());
-        System.out.println(BattleField.getInstance().getFieldCell(0, 2).getFieldCellType());
+//        System.out.println(BattleField.getInstance().getFieldCell(0, 0).getFieldCellType());
+//        System.out.println(BattleField.getInstance().getFieldCell(0, 2).getFieldCellType());
         Node initialNode = new Node(0, 0);
         Node finalNode = new Node(rows-1, cols-1);
 
@@ -42,7 +42,7 @@ public class App {
         //TODO: check cant turnos
         List<Node> path = aStar.findPath();
         for (Node node : path) {
-            System.out.println(node);
+//            System.out.println(node);
         }
     }
 }

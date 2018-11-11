@@ -2,6 +2,7 @@ package com.up.ia;
 
 import com.up.ia.astar.AStar;
 import com.up.ia.astar.Node;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import static org.junit.Assert.assertTrue;
 public class AppTest {
 
     @Test
+    @Ignore
     public void aStarTest() {
         Node initialNode = new Node(2, 1);
         Node finalNode = new Node(2, 5);
@@ -24,7 +26,7 @@ public class AppTest {
         aStar.setBlocks(blocksArray);
         List<Node> path = aStar.findPath();
         for (Node node : path) {
-            System.out.println(node);
+//            System.out.println(node);
         }
         assertTrue(path.size() == 5);
     }
