@@ -1,4 +1,4 @@
 file://////////////////////////////////////////////////////////////////home/jbadano/UP/IA/MyWarrior/out/artifacts/MyWarrior_jar/MyWarrior.jar
-main.Mananger
+com.up.ia.Mananger
 file://////////////////////////////////////////////////////////////////home/jbadano/UP/IA/MyWarrior/out/artifacts/MyWarrior_jar/MyWarrior.jar
-main.Mananger
+com.up.ia.Mananger2
